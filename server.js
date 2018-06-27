@@ -29,8 +29,35 @@ app.post('/todos', (req, res) => {
   var todo = new Todo({
     text: req.body.text
   });
+  
+  console.log("after var todo = new Todo(), todo is ", todo)
+  /*
+  after var todo = new Todo(), todo is  { text: 'test text1',
+
+  _id: 5b331105a9956203656e19bc,
+
+  completedAt: null,
+
+  completed: false }
+  */
+  console.log(todo.id)  //5b331105a9956203656e19bc
 
   todo.save().then((doc) => {
+    console.log(doc === todo) //true  meaning exact same object
+    console.log(doc)
+    console.log(todo)
+    /*
+    above two lines both show
+    { __v: 0,
+
+    text: 'test text4',
+
+    _id: 5b331290db56bc0a5b7295a5,
+
+    completedAt: null,
+
+    completed: false }
+    */
     res.send(doc);
   }, (e) => {
     res.status(400).send(e);
